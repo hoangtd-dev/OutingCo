@@ -5,7 +5,7 @@
 ## Commit Convention
 
 ```
-<type>: <jira-id> <short description>
+<type>: <short description>
 ```
 
 ### Types
