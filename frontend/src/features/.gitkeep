@@ -1,0 +1,3 @@
+# One folder per domain module from the OutingCo brief, e.g.
+#   auth/  outings/  bookings/  clients/  transport/  post-outing/
+# Each feature owns its components, hooks, and API calls.
