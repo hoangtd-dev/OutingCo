@@ -1,0 +1,5 @@
+# Shared, presentational UI primitives reused across features
+# (buttons, badges, inputs, modals).
+#
+# Anything used by only one feature belongs in that feature's own
+# components/ folder instead.

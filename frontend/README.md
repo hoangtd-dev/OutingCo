@@ -28,21 +28,27 @@ The dev server runs on http://localhost:5173.
 
 ```
 src/
-├── app/          App shell — providers, routing, global layout
+├── app/          App shell — providers, routing, global wiring
 ├── assets/       Static assets imported by components
 ├── components/   Shared, presentational UI primitives
 ├── features/     One folder per domain module (auth, outings, bookings, …)
+│   └── home/
+│       └── pages/    Route-level screens owned by that feature
 ├── hooks/        Reusable React hooks
+├── layouts/      Reusable page shells composed by pages
 ├── lib/          Framework-agnostic helpers, config, API client
-├── pages/        Route-level screens composed from features
 └── types/        Shared TypeScript types
 ```
+
+Pages live inside the feature that owns them, so a feature ships its screens, components, and
+hooks together. Anything shared across features moves up into `components/`, `hooks/` or `lib/`.
+Page framing (header, sidebar, spacing) belongs in `layouts/` so screens don't repeat it.
 
 ## Path aliases
 
 Imports resolve through aliases declared in both `tsconfig.app.json` and `vite.config.ts`:
 
-`@/*`, `@app/*`, `@components/*`, `@features/*`, `@hooks/*`, `@lib/*`, `@pages/*`, `@types/*`
+`@/*`, `@app/*`, `@components/*`, `@features/*`, `@hooks/*`, `@layouts/*`, `@lib/*`, `@types/*`
 
 ## Environment variables
 

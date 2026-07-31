@@ -1,3 +1,13 @@
 # One folder per domain module from the OutingCo brief, e.g.
 #   auth/  outings/  bookings/  clients/  transport/  post-outing/
-# Each feature owns its components, hooks, and API calls.
+#
+# Each feature owns its own screens and internals:
+#
+#   features/<feature>/
+#   ├── pages/       route-level screens for this feature
+#   ├── components/  UI used only by this feature
+#   ├── hooks/       hooks used only by this feature
+#   └── api/         requests for this feature
+#
+# Anything reused by more than one feature moves up into
+# src/components, src/hooks or src/lib. Page framing lives in src/layouts.

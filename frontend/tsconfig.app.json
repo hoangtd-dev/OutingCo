@@ -30,8 +30,8 @@
       "@components/*": ["./src/components/*"],
       "@features/*": ["./src/features/*"],
       "@hooks/*": ["./src/hooks/*"],
+      "@layouts/*": ["./src/layouts/*"],
       "@lib/*": ["./src/lib/*"],
-      "@pages/*": ["./src/pages/*"],
       "@types/*": ["./src/types/*"]
     }
   },

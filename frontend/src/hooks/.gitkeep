@@ -1,0 +1,4 @@
+# Reusable React hooks shared across more than one feature.
+#
+# Hooks used by only one feature belong in that feature's own
+# hooks/ folder instead.
