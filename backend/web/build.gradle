@@ -1,0 +1,14 @@
+plugins {
+    id 'java'
+    alias(libs.plugins.spring.boot)
+}
+
+dependencies {
+    implementation project(':core')
+    implementation project(':infrastructure')
+    implementation project(':service')
+
+    implementation platform(libs.spring.boot.bom)
+
+    implementation libs.starter.web
+}

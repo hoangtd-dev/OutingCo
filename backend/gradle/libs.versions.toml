@@ -1,0 +1,17 @@
+[versions]
+spring-boot = "3.5.4"
+dependency-analysis = "3.18.0"
+
+[libraries]
+spring-boot-bom = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "spring-boot" }
+
+# starter
+starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
+
+# testing
+starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
+junit-launcher = { module = "org.junit.platform:junit-platform-launcher" }
+
+[plugins]
+spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
+dependency-analysis = { id = "com.autonomousapps.dependency-analysis", version.ref = "dependency-analysis" }

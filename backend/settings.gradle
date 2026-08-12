@@ -1,1 +1,8 @@
-rootProject.name = 'api'
+rootProject.name = 'outingCo-api'
+
+include(
+    'core',
+    'infrastructure',
+    'service',
+    'web'
+)
