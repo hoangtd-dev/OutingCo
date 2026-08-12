@@ -1,10 +1,12 @@
 plugins {
-    alias(libs.plugins.dependency.analysis)
+    // alias(libs.plugins.dependency.analysis)
+    alias(libs.plugins.spring.dependency.management) apply false
 }
 
 subprojects {
     apply plugin: 'java'
-    apply plugin: libs.plugins.dependency.analysis.get().pluginId
+    // apply plugin: libs.plugins.dependency.analysis.get().pluginId
+    apply plugin: libs.plugins.spring.dependency.management.get().pluginId
 
     java {
         sourceCompatibility = JavaVersion.VERSION_21

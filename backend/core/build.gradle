@@ -1,3 +1,2 @@
 dependencies {
-	implementation platform(libs.spring.boot.bom)
 }

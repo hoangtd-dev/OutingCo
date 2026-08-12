@@ -1,6 +1,7 @@
 [versions]
-spring-boot = "3.5.4"
+spring-boot = "4.1.0"
 dependency-analysis = "3.18.0"
+spring-dependency-management = "1.1.7"
 
 [libraries]
 spring-boot-bom = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "spring-boot" }
@@ -14,4 +15,5 @@ junit-launcher = { module = "org.junit.platform:junit-platform-launcher" }
 
 [plugins]
 spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
+spring-dependency-management = { id = "io.spring.dependency-management", version.ref = "spring-dependency-management" }
 dependency-analysis = { id = "com.autonomousapps.dependency-analysis", version.ref = "dependency-analysis" }
