@@ -1,0 +1,4 @@
+plugins {
+    id 'outing-java-conventions'
+    id 'org.springframework.boot'
+}
