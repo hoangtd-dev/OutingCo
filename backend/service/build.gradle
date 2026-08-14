@@ -1,4 +1,8 @@
+plugins {
+    id 'outing-java-conventions'
+}
+
 dependencies {
-    implementation project(':core')
+    api project(':core')
     implementation project(':infrastructure')
 }

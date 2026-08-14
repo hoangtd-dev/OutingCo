@@ -1,3 +1,12 @@
+plugins {
+    id 'outing-java-conventions'
+}
+
 dependencies {
-    implementation project(':core')
+    api project(':core')
+
+    api libs.starter.data.jpa
+    runtimeOnly libs.mysql.connector
+
+    testRuntimeOnly libs.h2
 }

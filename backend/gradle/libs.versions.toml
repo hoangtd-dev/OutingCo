@@ -5,13 +5,24 @@ spring-dependency-management = "1.1.7"
 
 [libraries]
 spring-boot-bom = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "spring-boot" }
+spring-boot-gradle-plugin ={ module = "org.springframework.boot:spring-boot-gradle-plugin", version.ref = "spring-boot" }
+lombok = { module = "org.projectlombok:lombok" }
 
 # starter
 starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
+starter-data-jpa = { module = "org.springframework.boot:spring-boot-starter-data-jpa" }
+starter-validation = { module = "org.springframework.boot:spring-boot-starter-validation" }
+
+# persistence api (entities)
+jakarta-persistence-api = { module = "jakarta.persistence:jakarta.persistence-api" }
+
+# driver
+mysql-connector = { module = "com.mysql:mysql-connector-j" }
 
 # testing
 starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
 junit-launcher = { module = "org.junit.platform:junit-platform-launcher" }
+h2 = { module = "com.h2database:h2" }
 
 [plugins]
 spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }

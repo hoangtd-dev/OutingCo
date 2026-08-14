@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.spring.boot)
+    id 'outing-spring-boot-app'
 }
 
 dependencies {
@@ -8,4 +8,6 @@ dependencies {
     implementation project(':service')
 
     implementation libs.starter.web
+
+    testRuntimeOnly libs.h2
 }
