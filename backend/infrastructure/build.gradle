@@ -1,11 +1,11 @@
 plugins {
-    id 'outing-java-conventions'
+    id 'outing-spring-boot-app'
 }
 
 dependencies {
-    api project(':core')
+    implementation project(':core')
 
-    api libs.starter.data.jpa
+    implementation libs.starter.data.jpa
     runtimeOnly libs.mysql.connector
 
     testRuntimeOnly libs.h2

@@ -2,7 +2,4 @@ plugins {
     id 'outing-java-conventions'
 }
 
-dependencies {
-    api libs.jakarta.persistence.api
-    api libs.starter.validation
-}
+dependencies { }
