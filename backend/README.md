@@ -22,7 +22,7 @@ backend/
     ├── main
     │   ├── java/com/outing/api
     │   │   ├── ApiApplication.java
-    │   │   ├── gateway/
+    │   │   ├── gateway (all controllers)/
     │   │   │   └── package-info.java
     │   │   └── module-name/
     │   │       ├── package-info.java 
@@ -30,7 +30,6 @@ backend/
     │   │       │   ├── ClientExternalAPI.java
     │   │       │   ├── dto/
     │   │       │   └── event/
-    │   │       │   └── package-info.java
     │   │       └── internal/
     │   │           ├── api/ClientInternalAPI.java
     │   │           ├── management/ClientManagement.java
