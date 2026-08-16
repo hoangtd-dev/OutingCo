@@ -12,12 +12,35 @@ Sub-packages of `com.outing.api`, declared in `package-info.java`:
 | `gateway` | all modules |
 | `authentication`, `client`, `event`, `notification`, `user`, `venue` | none |
 
-## Layout
+## Structure
 
 ```
-<module>/
-  api/        public — ExternalAPI, dto/, event/   @NamedInterface("api")
-  internal/   hidden — management/, entities/, repositories/, mapper/
+backend/
+├── build.gradle
+├── gradle/
+└── src
+    ├── main
+    │   ├── java/com/outing/api
+    │   │   ├── ApiApplication.java
+    │   │   ├── gateway/
+    │   │   │   └── package-info.java
+    │   │   └── module-name/
+    │   │       ├── package-info.java 
+    │   │       ├── api (public)/
+    │   │       │   ├── ClientExternalAPI.java
+    │   │       │   ├── dto/
+    │   │       │   └── event/
+    │   │       │   └── package-info.java
+    │   │       └── internal/
+    │   │           ├── api/ClientInternalAPI.java
+    │   │           ├── management/ClientManagement.java
+    │   │           ├── entities/
+    │   │           ├── repositories/
+    │   │           └── mapper/
+    │   └── resources/application.yaml
+    └── test/java/com/outing/api
+        ├── ApiApplicationTests.java
+        └── ModularityTests.java
 ```
 
 ## Commands
