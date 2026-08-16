@@ -1,0 +1,22 @@
+package com.outing.api;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.modulith.core.ApplicationModules;
+import org.springframework.modulith.docs.Documenter;
+
+class ModularityTests {
+
+	ApplicationModules modules = ApplicationModules.of(ApiApplication.class);
+
+	@Test
+	void verifiesModularStructure() {
+		modules.verify();
+	}
+
+	@Test
+	void generatesDocs() {
+		new Documenter(modules)
+				.writeModulesAsPlantUml()
+				.writeIndividualModulesAsPlantUml();
+	}
+}
