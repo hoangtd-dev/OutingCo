@@ -1,8 +1,0 @@
-plugins {
-    id 'outing-java-conventions'
-}
-
-dependencies {
-    api project(':core')
-    implementation project(':infrastructure')
-}

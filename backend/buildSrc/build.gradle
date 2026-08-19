@@ -1,9 +1,0 @@
-plugins {
-    id 'groovy-gradle-plugin'
-}
-
-def libs = extensions.getByType(VersionCatalogsExtension).named('libs')
-
-dependencies {
-    implementation libs.findLibrary('spring-boot-gradle-plugin').get()
-}
