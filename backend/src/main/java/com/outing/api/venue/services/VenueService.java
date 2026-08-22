@@ -1,4 +1,4 @@
-package com.outing.api.venue.internal.services;
+package com.outing.api.venue.services;
 
 public class VenueService {
 
