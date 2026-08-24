@@ -1,4 +1,4 @@
-package com.outing.api.client.internal.services;
+package com.outing.api.client.services;
 
 import java.util.List;
 
@@ -7,9 +7,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.outing.api.client.api.dto.ClientResponse;
 import com.outing.api.client.api.dto.ClientRequest;
-import com.outing.api.client.internal.entities.Client;
-import com.outing.api.client.internal.mapper.ClientMapper;
-import com.outing.api.client.internal.repositories.ClientRepository;
+import com.outing.api.client.entities.Client;
+import com.outing.api.client.mapper.ClientMapper;
+import com.outing.api.client.repositories.ClientRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -29,7 +29,7 @@ public class ClientService {
 	}
 
 	public List<ClientResponse> findAll() {
-		return clientRepository.findAll().stream().map(clientMapper::toResponse).toList();
+		return clientMapper.toResponse(clientRepository.findAllByDeletedFalse());
 	}
 
 	public ClientResponse findById(int id) {
@@ -44,11 +44,13 @@ public class ClientService {
 	}
 
 	@Transactional
-	public void delete(int id) {
-		clientRepository.delete(requireClient(id));
+	public void deleteClient(int id) {
+		Client client = requireClient(id);
+		client.setDeleted(true);
+		clientRepository.save(client);
 	}
 
 	private Client requireClient(int id) {
-		return clientRepository.findById(id).orElseThrow(() -> new ClientNotFoundException(id));
+		return clientRepository.findByIdAndDeletedFalse(id).orElseThrow(() -> new ClientNotFoundException(id));
 	}
 }

@@ -1,14 +1,15 @@
-package com.outing.api.client.internal.entities;
+package com.outing.api.client.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Embeddable
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Setter
+@NoArgsConstructor
 public class ClientAddress {
 
 	@Column(name = "street", length = 255)
@@ -22,11 +23,4 @@ public class ClientAddress {
 
 	@Column(name = "postcode", length = 4)
 	private String postcode;
-
-	public ClientAddress(String street, String suburb, String state, String postcode) {
-		this.street = street;
-		this.suburb = suburb;
-		this.state = state;
-		this.postcode = postcode;
-	}
 }

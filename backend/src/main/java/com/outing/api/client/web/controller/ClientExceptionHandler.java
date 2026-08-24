@@ -1,4 +1,4 @@
-package com.outing.api.client.api;
+package com.outing.api.client.web.controller;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.outing.api.client.internal.services.ClientNotFoundException;
+import com.outing.api.client.services.ClientNotFoundException;
 
 @RestControllerAdvice(assignableTypes = ClientController.class)
 public class ClientExceptionHandler {

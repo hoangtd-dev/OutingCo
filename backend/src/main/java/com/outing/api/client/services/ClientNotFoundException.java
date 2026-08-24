@@ -1,4 +1,4 @@
-package com.outing.api.client.internal.services;
+package com.outing.api.client.services;
 
 public class ClientNotFoundException extends RuntimeException {
 

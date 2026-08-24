@@ -1,4 +1,4 @@
-package com.outing.api.client.internal.entities;
+package com.outing.api.client.entities;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -13,14 +13,15 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "clients")
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Setter
+@NoArgsConstructor
 public class Client {
 
 	@Id
@@ -36,11 +37,14 @@ public class Client {
 	@Column(name = "date_of_birth", nullable = false)
 	private LocalDate dateOfBirth;
 
-	@Column(name = "phone_number", length = 20)
+	@Column(name = "phone_number", length = 12)
 	private String phoneNumber;
 
 	@Embedded
 	private ClientAddress address;
+
+	@Column(name = "deleted", nullable = false)
+	private boolean deleted = false;
 
 	@CreationTimestamp
 	@Column(name = "created_at", nullable = false, updatable = false)
@@ -49,18 +53,4 @@ public class Client {
 	@UpdateTimestamp
 	@Column(name = "updated_at", nullable = false)
 	private Instant updatedAt;
-
-	public Client(String firstName, String lastName, LocalDate dateOfBirth, String phoneNumber,
-			ClientAddress address) {
-		updateDetails(firstName, lastName, dateOfBirth, phoneNumber, address);
-	}
-
-	public void updateDetails(String firstName, String lastName, LocalDate dateOfBirth,
-			String phoneNumber, ClientAddress address) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.dateOfBirth = dateOfBirth;
-		this.phoneNumber = phoneNumber;
-		this.address = address;
-	}
 }

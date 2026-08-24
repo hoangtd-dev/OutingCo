@@ -1,4 +1,4 @@
-package com.outing.api.client.api;
+package com.outing.api.client.web.controller;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.outing.api.client.api.dto.ClientResponse;
 import com.outing.api.client.api.dto.ClientRequest;
-import com.outing.api.client.internal.services.ClientService;
+import com.outing.api.client.services.ClientService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -51,6 +51,6 @@ public class ClientController {
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable int id) {
-		clientService.delete(id);
+		clientService.deleteClient(id);
 	}
 }
