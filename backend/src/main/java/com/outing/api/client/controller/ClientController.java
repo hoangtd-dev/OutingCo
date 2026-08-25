@@ -30,28 +30,28 @@ public class ClientController {
 	}
 
 	@PostMapping
-	public ResponseEntity<Void> create(@Valid @RequestBody ClientRequest request) {
+	public ResponseEntity<Void> createClient(@Valid @RequestBody ClientRequest request) {
 		clientService.createClient(request);
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 
 	@GetMapping
-	public ResponseEntity<List<ClientResponse>> findAll() {
-		return ResponseEntity.ok(clientService.findAll());
+	public ResponseEntity<List<ClientResponse>> getClients() {
+		return ResponseEntity.ok(clientService.getClients());
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<ClientResponse> findById(@PathVariable int id) {
-		return ResponseEntity.ok(clientService.findById(id));
+		return ResponseEntity.ok(clientService.findUserById(id));
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<ClientResponse> update(@PathVariable int id, @Valid @RequestBody ClientRequest request) {
+	public ResponseEntity<ClientResponse> updateClient(@PathVariable int id, @Valid @RequestBody ClientRequest request) {
 		return ResponseEntity.ok(clientService.updateClient(id, request));
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> delete(@PathVariable int id) {
+	public ResponseEntity<Void> deleteClient(@PathVariable int id) {
 		clientService.deleteClient(id);
 		return ResponseEntity.noContent().build();
 	}

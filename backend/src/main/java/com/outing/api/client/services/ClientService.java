@@ -9,7 +9,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.outing.api.client.dto.ClientRequest;
 import com.outing.api.client.dto.ClientResponse;
-import com.outing.api.client.entities.Client;
 import com.outing.api.client.mapper.ClientMapper;
 import com.outing.api.client.repositories.ClientRepository;
 
@@ -28,33 +27,34 @@ public class ClientService {
 
 	@Transactional
 	public ClientResponse createClient(ClientRequest request) {
-		Client client = clientMapper.toEntity(request);
+		var client = clientMapper.toEntity(request);
 		return clientMapper.toResponse(clientRepository.save(client));
 	}
 
-	public List<ClientResponse> findAll() {
-		return clientMapper.toResponse(clientRepository.findAllByDeletedFalse());
+	public List<ClientResponse> getClients() {
+		var clients = clientRepository.findAllByDeletedFalse();
+		return clientMapper.toResponse(clients);
 	}
 
-	public ClientResponse findById(int id) {
-		Client client = clientRepository.findByIdAndDeletedFalse(id)
+	public ClientResponse findUserById(int id) {
+		var clientEntity = clientRepository.findByIdAndDeletedFalse(id)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found " + id));
-		return clientMapper.toResponse(client);
+		return clientMapper.toResponse(clientEntity);
 	}
 
 	@Transactional
 	public ClientResponse updateClient(int id, ClientRequest request) {
-		Client client = clientRepository.findByIdAndDeletedFalse(id)
+		var clientEntity = clientRepository.findByIdAndDeletedFalse(id)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found " + id));
-		clientMapper.updateEntity(request, client);
-		return clientMapper.toResponse(clientRepository.save(client));
+		clientMapper.updateEntity(request, clientEntity);
+		return clientMapper.toResponse(clientRepository.save(clientEntity));
 	}
 
 	@Transactional
 	public void deleteClient(int id) {
-		Client client = clientRepository.findByIdAndDeletedFalse(id)
+		var clientEntity = clientRepository.findByIdAndDeletedFalse(id)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found " + id));
-		client.setDeleted(true);
-		clientRepository.save(client);
+		clientEntity.setDeleted(true);
+		clientRepository.save(clientEntity);
 	}
 }
