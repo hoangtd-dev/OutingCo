@@ -2,8 +2,10 @@ package com.outing.api.client.services;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.outing.api.client.dto.ClientRequest;
 import com.outing.api.client.dto.ClientResponse;
@@ -53,6 +55,6 @@ public class ClientService {
 	}
 
 	private Client requireClient(int id) {
-		return clientRepository.findByIdAndDeletedFalse(id).orElseThrow();
+		return clientRepository.findByIdAndDeletedFalse(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found " + id));
 	}
 }
