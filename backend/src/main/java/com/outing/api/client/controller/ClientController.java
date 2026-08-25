@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.outing.api.client.dto.ClientResponse;
@@ -32,28 +31,28 @@ public class ClientController {
 
 	@PostMapping
 	public ResponseEntity<Void> create(@Valid @RequestBody ClientRequest request) {
-		clientService.create(request);
+		clientService.createClient(request);
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 
 	@GetMapping
-	public List<ClientResponse> findAll() {
-		return clientService.findAll();
+	public ResponseEntity<List<ClientResponse>> findAll() {
+		return ResponseEntity.ok(clientService.findAll());
 	}
 
 	@GetMapping("/{id}")
-	public ClientResponse findById(@PathVariable int id) {
-		return clientService.findById(id);
+	public ResponseEntity<ClientResponse> findById(@PathVariable int id) {
+		return ResponseEntity.ok(clientService.findById(id));
 	}
 
 	@PutMapping("/{id}")
-	public ClientResponse update(@PathVariable int id, @Valid @RequestBody ClientRequest request) {
-		return clientService.update(id, request);
+	public ResponseEntity<ClientResponse> update(@PathVariable int id, @Valid @RequestBody ClientRequest request) {
+		return ResponseEntity.ok(clientService.updateClient(id, request));
 	}
 
 	@DeleteMapping("/{id}")
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void delete(@PathVariable int id) {
+	public ResponseEntity<Void> delete(@PathVariable int id) {
 		clientService.deleteClient(id);
+		return ResponseEntity.noContent().build();
 	}
 }

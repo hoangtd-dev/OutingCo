@@ -27,7 +27,7 @@ public class ClientService {
 	}
 
 	@Transactional
-	public ClientResponse create(ClientRequest request) {
+	public ClientResponse createClient(ClientRequest request) {
 		Client client = clientMapper.toEntity(request);
 		return clientMapper.toResponse(clientRepository.save(client));
 	}
@@ -37,24 +37,24 @@ public class ClientService {
 	}
 
 	public ClientResponse findById(int id) {
-		return clientMapper.toResponse(requireClient(id));
+		Client client = clientRepository.findByIdAndDeletedFalse(id)
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found " + id));
+		return clientMapper.toResponse(client);
 	}
 
 	@Transactional
-	public ClientResponse update(int id, ClientRequest request) {
-		Client client = requireClient(id);
+	public ClientResponse updateClient(int id, ClientRequest request) {
+		Client client = clientRepository.findByIdAndDeletedFalse(id)
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found " + id));
 		clientMapper.updateEntity(request, client);
 		return clientMapper.toResponse(clientRepository.save(client));
 	}
 
 	@Transactional
 	public void deleteClient(int id) {
-		Client client = requireClient(id);
+		Client client = clientRepository.findByIdAndDeletedFalse(id)
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found " + id));
 		client.setDeleted(true);
 		clientRepository.save(client);
-	}
-
-	private Client requireClient(int id) {
-		return clientRepository.findByIdAndDeletedFalse(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found " + id));
 	}
 }
