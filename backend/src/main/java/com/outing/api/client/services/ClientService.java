@@ -27,8 +27,8 @@ public class ClientService {
 
 	@Transactional
 	public ClientResponse createClient(ClientRequest request) {
-		var client = clientMapper.toEntity(request);
-		return clientMapper.toResponse(clientRepository.save(client));
+		var clientEntity = clientMapper.toEntity(request);
+		return clientMapper.toResponse(clientRepository.save(clientEntity));
 	}
 
 	public List<ClientResponse> getClients() {
