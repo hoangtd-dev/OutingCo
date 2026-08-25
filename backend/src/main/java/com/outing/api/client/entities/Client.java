@@ -1,7 +1,7 @@
 package com.outing.api.client.entities;
 
-import java.time.Instant;
 import java.time.LocalDate;
+import java.time.OffsetDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -48,9 +48,9 @@ public class Client {
 
 	@CreationTimestamp
 	@Column(name = "created_at", nullable = false, updatable = false)
-	private Instant createdAt;
+	private OffsetDateTime createdAt;
 
 	@UpdateTimestamp
 	@Column(name = "updated_at", nullable = false)
-	private Instant updatedAt;
+	private OffsetDateTime updatedAt;
 }

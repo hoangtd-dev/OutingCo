@@ -5,22 +5,24 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.outing.api.client.api.dto.ClientResponse;
-import com.outing.api.client.api.dto.ClientRequest;
+import com.outing.api.client.dto.ClientRequest;
+import com.outing.api.client.dto.ClientResponse;
 import com.outing.api.client.entities.Client;
 import com.outing.api.client.mapper.ClientMapper;
 import com.outing.api.client.repositories.ClientRepository;
 
-import lombok.RequiredArgsConstructor;
-
 @Service
-@RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class ClientService {
 
 	private final ClientRepository clientRepository;
 
 	private final ClientMapper clientMapper;
+
+	public ClientService(ClientRepository clientRepository, ClientMapper clientMapper) {
+		this.clientRepository = clientRepository;
+		this.clientMapper = clientMapper;
+	}
 
 	@Transactional
 	public ClientResponse create(ClientRequest request) {
@@ -51,6 +53,6 @@ public class ClientService {
 	}
 
 	private Client requireClient(int id) {
-		return clientRepository.findByIdAndDeletedFalse(id).orElseThrow(() -> new ClientNotFoundException(id));
+		return clientRepository.findByIdAndDeletedFalse(id).orElseThrow();
 	}
 }

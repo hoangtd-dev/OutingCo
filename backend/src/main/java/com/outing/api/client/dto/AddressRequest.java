@@ -1,4 +1,4 @@
-package com.outing.api.client.api.dto;
+package com.outing.api.client.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;

@@ -7,9 +7,9 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
-import com.outing.api.client.api.dto.AddressRequest;
-import com.outing.api.client.api.dto.ClientRequest;
-import com.outing.api.client.api.dto.ClientResponse;
+import com.outing.api.client.dto.AddressRequest;
+import com.outing.api.client.dto.ClientRequest;
+import com.outing.api.client.dto.ClientResponse;
 import com.outing.api.client.entities.Client;
 import com.outing.api.client.entities.ClientAddress;
 

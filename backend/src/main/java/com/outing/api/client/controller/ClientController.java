@@ -1,8 +1,9 @@
-package com.outing.api.client.web.controller;
+package com.outing.api.client.controller;
 
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,24 +14,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.outing.api.client.api.dto.ClientResponse;
-import com.outing.api.client.api.dto.ClientRequest;
+import com.outing.api.client.dto.ClientResponse;
+import com.outing.api.client.dto.ClientRequest;
 import com.outing.api.client.services.ClientService;
 
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/clients")
-@RequiredArgsConstructor
 public class ClientController {
 
 	private final ClientService clientService;
 
+	public ClientController(ClientService clientService) {
+		this.clientService = clientService;
+	}
+
 	@PostMapping
-	@ResponseStatus(HttpStatus.CREATED)
-	public ClientResponse create(@Valid @RequestBody ClientRequest request) {
-		return clientService.create(request);
+	public ResponseEntity<Void> create(@Valid @RequestBody ClientRequest request) {
+		clientService.create(request);
+		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 
 	@GetMapping
