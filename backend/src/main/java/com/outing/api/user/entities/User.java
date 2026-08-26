@@ -1,4 +1,4 @@
-package com.outing.api.venue.entities;
+package com.outing.api.user.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,11 +11,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "venue")
-@NoArgsConstructor
+@Table(name = "user")
 @Getter
 @Setter
-public class Venue {
+@NoArgsConstructor
+public class User {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;

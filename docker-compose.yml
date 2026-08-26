@@ -5,13 +5,13 @@ services:
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD:
-      MYSQL_DATABASE: outing
+      MYSQL_DATABASE:
     ports:
       - "3306:3306"
     volumes:
       - mysql-data:/var/lib/mysql
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-padmin@123"]
+    healthcheck
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "-p"]
       interval: 5s
       timeout: 5s
       retries: 10
@@ -27,8 +27,8 @@ services:
     environment:
       DB_HOST: mysql
       DB_PORT: 3306
-      DB_NAME: outing
-      DB_USERNAME: root
+      DB_NAME: 
+      DB_USERNAME: 
       DB_PASSWORD: 
     ports:
       - "8080:8080"
