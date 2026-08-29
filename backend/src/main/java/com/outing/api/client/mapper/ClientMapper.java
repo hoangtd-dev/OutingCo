@@ -2,10 +2,7 @@ package com.outing.api.client.mapper;
 
 import java.util.List;
 
-import org.mapstruct.InheritConfiguration;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
+import org.springframework.stereotype.Component;
 
 import com.outing.api.client.dto.AddressRequest;
 import com.outing.api.client.dto.ClientRequest;
@@ -13,21 +10,44 @@ import com.outing.api.client.dto.ClientResponse;
 import com.outing.api.client.entities.Client;
 import com.outing.api.client.entities.ClientAddress;
 
-@Mapper(componentModel = "spring")
-public interface ClientMapper {
+@Component
+public class ClientMapper {
 
-	ClientResponse toResponse(Client client);
+	public ClientResponse toResponse(Client client) {
+		return new ClientResponse(client.getId(), client.getFirstName(), client.getLastName());
+	}
 
-	List<ClientResponse> toResponse(List<Client> clients);
+	public List<ClientResponse> toResponse(List<Client> clients) {
+		return clients.stream().map(this::toResponse).toList();
+	}
 
-	ClientAddress toAddress(AddressRequest request);
+	public ClientAddress toAddress(AddressRequest request) {
+		if (request == null) {
+			return null;
+		}
+		ClientAddress address = new ClientAddress();
+		address.setStreet(request.street());
+		address.setSuburb(request.suburb());
+		address.setState(request.state());
+		address.setPostcode(request.postcode());
+		return address;
+	}
 
-	@Mapping(target = "id", ignore = true)
-	@Mapping(target = "deleted", ignore = true)
-	@Mapping(target = "createdAt", ignore = true)
-	@Mapping(target = "updatedAt", ignore = true)
-	Client toEntity(ClientRequest request);
+	public Client toEntity(ClientRequest request) {
+		Client client = new Client();
+		applyRequest(request, client);
+		return client;
+	}
 
-	@InheritConfiguration(name = "toEntity")
-	void updateEntity(ClientRequest request, @MappingTarget Client client);
+	public void updateEntity(ClientRequest request, Client client) {
+		applyRequest(request, client);
+	}
+
+	private void applyRequest(ClientRequest request, Client client) {
+		client.setFirstName(request.firstName());
+		client.setLastName(request.lastName());
+		client.setDateOfBirth(request.dateOfBirth());
+		client.setPhoneNumber(request.phoneNumber());
+		client.setAddress(toAddress(request.address()));
+	}
 }

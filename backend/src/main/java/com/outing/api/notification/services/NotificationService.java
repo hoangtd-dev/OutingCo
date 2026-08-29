@@ -1,4 +1,4 @@
-package com.outing.api.notification.internal.services;
+package com.outing.api.notification.services;
 
 public class NotificationService {
 

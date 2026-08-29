@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
-import com.outing.api.client.dto.ClientResponse;
 import com.outing.api.client.dto.ClientRequest;
-import com.outing.api.client.services.ClientService;
+import com.outing.api.client.dto.ClientResponse;
+import com.outing.api.client.entities.Client;
+import com.outing.api.client.mapper.ClientMapper;
+import com.outing.api.client.repositories.ClientRepository;
 
 import jakarta.validation.Valid;
 
@@ -23,36 +26,51 @@ import jakarta.validation.Valid;
 @RequestMapping("/api/clients")
 public class ClientController {
 
-	private final ClientService clientService;
+	private final ClientRepository clientRepository;
 
-	public ClientController(ClientService clientService) {
-		this.clientService = clientService;
+	private final ClientMapper clientMapper;
+
+	public ClientController(ClientRepository clientRepository, ClientMapper clientMapper) {
+		this.clientRepository = clientRepository;
+		this.clientMapper = clientMapper;
 	}
 
 	@PostMapping
 	public ResponseEntity<Void> createClient(@Valid @RequestBody ClientRequest request) {
-		clientService.createClient(request);
+		Client clientEntity = clientMapper.toEntity(request);
+		clientRepository.save(clientEntity);
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 
 	@GetMapping
 	public ResponseEntity<List<ClientResponse>> getClients() {
-		return ResponseEntity.ok(clientService.getClients());
+		List<Client> clients = clientRepository.findAllByDeletedFalse();
+		return ResponseEntity.ok(clientMapper.toResponse(clients));
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<ClientResponse> findUserById(@PathVariable int id) {
-		return ResponseEntity.ok(clientService.findUserById(id));
+		Client clientEntity = requireClient(id);
+		return ResponseEntity.ok(clientMapper.toResponse(clientEntity));
 	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<ClientResponse> updateClient(@PathVariable int id, @Valid @RequestBody ClientRequest request) {
-		return ResponseEntity.ok(clientService.updateClient(id, request));
+		Client clientEntity = requireClient(id);
+		clientMapper.updateEntity(request, clientEntity);
+		return ResponseEntity.ok(clientMapper.toResponse(clientRepository.save(clientEntity)));
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deleteClient(@PathVariable int id) {
-		clientService.deleteClient(id);
+		Client clientEntity = requireClient(id);
+		clientEntity.setDeleted(true);
+		clientRepository.save(clientEntity);
 		return ResponseEntity.noContent().build();
+	}
+
+	private Client requireClient(int id) {
+		return clientRepository.findByIdAndDeletedFalse(id)
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found " + id));
 	}
 }

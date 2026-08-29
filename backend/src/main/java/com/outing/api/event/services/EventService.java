@@ -1,4 +1,4 @@
-package com.outing.api.event.internal.services;
+package com.outing.api.event.services;
 
 public class EventService {
 
