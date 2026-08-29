@@ -2,9 +2,7 @@ package com.outing.api.venue.mapper;
 
 import java.util.List;
 
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
+import org.springframework.stereotype.Component;
 
 import com.outing.api.venue.dto.requests.VenueDeletedRequest;
 import com.outing.api.venue.dto.requests.VenueRequest;
@@ -12,21 +10,28 @@ import com.outing.api.venue.dto.requests.VenueUpdateRequest;
 import com.outing.api.venue.dto.responses.VenueResponse;
 import com.outing.api.venue.entities.Venue;
 
-@Mapper(componentModel = "spring")
-public interface VenueMapper {
-	VenueResponse toResponse(Venue venue);
+@Component
+public class VenueMapper {
 
-	@Mapping(target = "id", ignore = true)
-	@Mapping(target = "deleted", ignore = true)
-	Venue toEntityCreated(VenueRequest request);
+	public VenueResponse toResponse(Venue venue) {
+		return new VenueResponse(venue.getId(), venue.getName(), venue.isDeleted());
+	}
 
-	@Mapping(target = "id", ignore = true)
-	@Mapping(target = "deleted", ignore = true)
-	void updateEntity(VenueUpdateRequest request, @MappingTarget Venue venue);
+	public List<VenueResponse> toResponseList(List<Venue> venues) {
+		return venues.stream().map(this::toResponse).toList();
+	}
 
-	@Mapping(target = "id", ignore = true)
-	@Mapping(target = "name", ignore = true)
-	void updateEntity(VenueDeletedRequest request, @MappingTarget Venue venue);
+	public Venue toEntityCreated(VenueRequest request) {
+		Venue venue = new Venue();
+		venue.setName(request.getName());
+		return venue;
+	}
 
-	List<VenueResponse> toResponseList(List<Venue> venues);
+	public void updateEntity(VenueUpdateRequest request, Venue venue) {
+		venue.setName(request.getName());
+	}
+
+	public void updateEntity(VenueDeletedRequest request, Venue venue) {
+		venue.setDeleted(request.isDeleted());
+	}
 }
