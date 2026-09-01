@@ -1,6 +1,12 @@
 package com.outing.api.venue.entities;
 
+import java.time.LocalDateTime;
+
+import com.outing.api.shared.entities.Address;
+import com.outing.api.shared.entities.SoftDeleteEntity;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,18 +17,31 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "venue")
-@NoArgsConstructor
+@Table(name = "venues")
 @Getter
 @Setter
-public class Venue {
+@NoArgsConstructor
+public class Venue extends SoftDeleteEntity {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private int id;
 
-	@Column(nullable = false, length = 255)
+	@Column(name = "name", nullable = false, length = 60)
 	private String name;
 
-	@Column(nullable = false)
-	private boolean deleted;
+	@Column(name = "global_venue_id")
+	private int globalVenueId;
+
+	@Column(name = "global_version")
+	private Integer globalVersion;
+
+	@Column(name = "is_overridden", nullable = false)
+	private Boolean isOverridden = false;
+
+	@Embedded
+	private Address address;
+
+	@Column(name = "synced_at")
+	private LocalDateTime syncedAt;
 }

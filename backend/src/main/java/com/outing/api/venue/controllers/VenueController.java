@@ -60,7 +60,7 @@ public class VenueController {
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deleteVenue(@PathVariable int id) {
 		Venue venueEntity = requireVenue(id);
-		venueEntity.setDeleted(true);
+		venueEntity.setIsDeleted(true);
 		venueRepository.save(venueEntity);
 		return ResponseEntity.noContent().build();
 	}
