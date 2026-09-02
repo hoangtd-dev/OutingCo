@@ -3,8 +3,8 @@ package com.outing.api.event.entities;
 import java.time.LocalDateTime;
 
 import com.outing.api.authentication.entities.User;
+import com.outing.api.event.enums.RouteStatus;
 import com.outing.api.shared.entities.SoftDeleteEntity;
-import com.outing.api.transport.enums.RouteStatus;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
