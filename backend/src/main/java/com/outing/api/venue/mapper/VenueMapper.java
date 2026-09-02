@@ -14,7 +14,7 @@ import com.outing.api.venue.entities.Venue;
 public class VenueMapper {
 
 	public VenueResponse toResponse(Venue venue) {
-		return new VenueResponse(venue.getId(), venue.getName(), venue.isDeleted());
+		return new VenueResponse(venue.getId(), venue.getName(), venue.getIsDeleted());
 	}
 
 	public List<VenueResponse> toResponseList(List<Venue> venues) {
@@ -32,6 +32,6 @@ public class VenueMapper {
 	}
 
 	public void updateEntity(VenueDeletedRequest request, Venue venue) {
-		venue.setDeleted(request.isDeleted());
+		venue.setIsDeleted(request.isDeleted());
 	}
 }

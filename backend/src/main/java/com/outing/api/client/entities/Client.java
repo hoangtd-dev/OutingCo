@@ -1,17 +1,20 @@
 package com.outing.api.client.entities;
 
 import java.time.LocalDate;
-import java.time.OffsetDateTime;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import com.outing.api.authentication.entities.User;
+import com.outing.api.shared.entities.Address;
+import com.outing.api.shared.entities.SoftDeleteEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,35 +25,46 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Client {
+public class Client extends SoftDeleteEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column(name = "first_name", nullable = false, length = 100)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "case_manager_id", nullable = false)
+	private User caseManager;
+
+	@Column(name = "first_name", nullable = false, length = 50)
 	private String firstName;
 
 	@Column(name = "last_name", nullable = false, length = 100)
 	private String lastName;
 
-	@Column(name = "date_of_birth", nullable = false)
-	private LocalDate dateOfBirth;
-
-	@Column(name = "phone_number", length = 12)
-	private String phoneNumber;
+	@Column(name = "email", nullable = false, length = 254)
+	private String email;
 
 	@Embedded
-	private ClientAddress address;
+	private Address address;
 
-	@Column(name = "deleted", nullable = false)
-	private boolean deleted = false;
+	@Column(name = "date_of_birth")
+	private LocalDate dateOfBirth;
 
-	@CreationTimestamp
-	@Column(name = "created_at", nullable = false, updatable = false)
-	private OffsetDateTime createdAt;
+	@Column(name = "client_number", length = 9)
+	private String clientNumber;
 
-	@UpdateTimestamp
-	@Column(name = "updated_at", nullable = false)
-	private OffsetDateTime updatedAt;
+	@Column(name = "phone", length = 15)
+	private String phone;
+
+	@Column(name = "emergency_contact_name", length = 150)
+	private String emergencyContactName;
+
+	@Column(name = "emergency_contact_relationship", length = 50)
+	private String emergencyContactRelationship;
+
+	@Column(name = "emergency_contact_phone_primary", length = 20)
+	private String emergencyContactPhonePrimary;
+
+	@Column(name = "is_active", nullable = false)
+	private Boolean isActive = true;
 }

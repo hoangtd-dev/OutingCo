@@ -8,7 +8,7 @@ import com.outing.api.client.dto.AddressRequest;
 import com.outing.api.client.dto.ClientRequest;
 import com.outing.api.client.dto.ClientResponse;
 import com.outing.api.client.entities.Client;
-import com.outing.api.client.entities.ClientAddress;
+import com.outing.api.shared.entities.Address;
 
 @Component
 public class ClientMapper {
@@ -21,13 +21,12 @@ public class ClientMapper {
 		return clients.stream().map(this::toResponse).toList();
 	}
 
-	public ClientAddress toAddress(AddressRequest request) {
+	public Address toAddress(AddressRequest request) {
 		if (request == null) {
 			return null;
 		}
-		ClientAddress address = new ClientAddress();
-		address.setStreet(request.street());
-		address.setSuburb(request.suburb());
+		Address address = new Address();
+		address.setAddressLine(request.street());
 		address.setState(request.state());
 		address.setPostcode(request.postcode());
 		return address;
@@ -47,7 +46,6 @@ public class ClientMapper {
 		client.setFirstName(request.firstName());
 		client.setLastName(request.lastName());
 		client.setDateOfBirth(request.dateOfBirth());
-		client.setPhoneNumber(request.phoneNumber());
 		client.setAddress(toAddress(request.address()));
 	}
 }
