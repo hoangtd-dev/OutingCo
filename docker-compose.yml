@@ -1,37 +1,49 @@
 services:
+  nginx:
+    image: nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - backend-server-1
+      - backend-server-2
+
   mysql:
     image: mysql:8.0
-    container_name: outing-mysql
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD:
-      MYSQL_DATABASE:
-    ports:
-      - "3306:3306"
-    volumes:
-      - mysql-data:/var/lib/mysql
-    healthcheck
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "-p"]
-      interval: 5s
-      timeout: 5s
-      retries: 10
+      MYSQL_ROOT_PASSWORD: 
+      MYSQL_DATABASE: 
+    expose:
+      - "3306"
 
-  backend:
+  backend-server-1:
     build:
       context: ./backend
-    container_name: outing-backend
     restart: unless-stopped
-    depends_on:
-      mysql:
-        condition: service_healthy
     environment:
-      DB_HOST: mysql
-      DB_PORT: 3306
+      SERVER_NAME: backend-server-1
+      DB_HOST: 
+      DB_PORT: 
       DB_NAME: 
       DB_USERNAME: 
       DB_PASSWORD: 
-    ports:
-      - "8080:8080"
-
-volumes:
-  mysql-data:
+    entrypoint: ["sh", "-c", "sleep 10 && exec java -jar /app/app.jar"]
+    expose:
+      - "8080"
+    
+  backend-server-2:
+    build:
+      context: ./backend
+    restart: unless-stopped
+    environment:
+      SERVER_NAME: backend-server-2
+      DB_HOST: 
+      DB_PORT: 
+      DB_NAME: 
+      DB_USERNAME: 
+      DB_PASSWORD: 
+    entrypoint: ["sh", "-c", "sleep 10 && exec java -jar /app/app.jar"]
+    expose:
+      - "8080"
