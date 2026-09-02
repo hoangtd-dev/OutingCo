@@ -1,16 +1,18 @@
 package com.outing.api.client.dto;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 public record AddressRequest(
 
-		@NotBlank @Size(max = 255) String street,
+		@Size(max = 10) String addressNumber,
 
-		@NotBlank @Size(max = 100) String suburb,
+		@Size(max = 100) String addressLine,
 
-		@NotBlank @Pattern(regexp = "[A-Z]{2,3}", message = "must be a state code such as NSW") String state,
+		@Size(max = 85) String city,
 
-		@NotBlank @Pattern(regexp = "[0-9]{4}", message = "must be 4 digits") String postcode) {
+		@Size(max = 100) String state,
+
+		@Size(max = 20) String postcode,
+
+		@Size(min = 2, max = 2) String country) {
 }

@@ -10,13 +10,27 @@ import jakarta.validation.constraints.Size;
 
 public record ClientRequest(
 
-		@NotBlank @Size(max = 100) String firstName,
+		@NotNull int caseManagerId,
+
+		@NotBlank @Size(max = 50) String firstName,
 
 		@NotBlank @Size(max = 100) String lastName,
 
-		@NotNull @Past LocalDate dateOfBirth,
+		@NotBlank @Size(max = 254) String email,
 
-		@Size(max = 20) String phoneNumber,
+		@Valid AddressRequest address,
 
-		@Valid AddressRequest address) {
+		@Past LocalDate dateOfBirth,
+
+		@Size(max = 9) String clientNumber,
+
+		@Size(max = 15) String phone,
+
+		@Size(max = 150) String emergencyContactName,
+
+		@Size(max = 50) String emergencyContactRelationship,
+
+		@Size(max = 20) String emergencyContactPhonePrimary,
+
+		Boolean isActive) {
 }
