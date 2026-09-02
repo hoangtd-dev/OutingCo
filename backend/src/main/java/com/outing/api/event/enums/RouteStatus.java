@@ -1,4 +1,4 @@
-package com.outing.api.transport.enums;
+package com.outing.api.event.enums;
 
 public enum RouteStatus {
 	DRAFT, OPTIMISED, IN_PROGRESS, COMPLETED
