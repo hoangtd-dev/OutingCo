@@ -11,5 +11,8 @@ spring:
     hibernate:
       ddl-auto: update
 
+app:
+  server-name: ${SERVER_NAME:unknown}
+
 server:
   port: 8080
