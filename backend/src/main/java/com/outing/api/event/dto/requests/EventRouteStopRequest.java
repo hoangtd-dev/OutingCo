@@ -3,7 +3,7 @@ package com.outing.api.event.dto.requests;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-import com.outing.api.transport.enums.StopStatus;
+import com.outing.api.event.enums.StopStatus;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;

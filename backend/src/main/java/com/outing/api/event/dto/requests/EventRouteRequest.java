@@ -2,7 +2,7 @@ package com.outing.api.event.dto.requests;
 
 import java.time.LocalDateTime;
 
-import com.outing.api.transport.enums.RouteStatus;
+import com.outing.api.event.enums.RouteStatus;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;

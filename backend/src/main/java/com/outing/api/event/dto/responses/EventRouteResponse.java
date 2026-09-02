@@ -2,7 +2,7 @@ package com.outing.api.event.dto.responses;
 
 import java.time.LocalDateTime;
 
-import com.outing.api.transport.enums.RouteStatus;
+import com.outing.api.event.enums.RouteStatus;
 
 public record EventRouteResponse(
 		int id,
