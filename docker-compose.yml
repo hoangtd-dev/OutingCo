@@ -24,11 +24,14 @@ services:
     restart: unless-stopped
     environment:
       SERVER_NAME: backend-server-1
-      DB_HOST: 
-      DB_PORT: 
-      DB_NAME: 
-      DB_USERNAME: 
-      DB_PASSWORD: 
+      DB_HOST:
+      DB_PORT:
+      DB_NAME:
+      DB_USERNAME:
+      DB_PASSWORD:
+      JWT_SECRET:
+      ADMIN_EMAIL:
+      ADMIN_PASSWORD:
     entrypoint: ["sh", "-c", "sleep 10 && exec java -jar /app/app.jar"]
     expose:
       - "8080"
@@ -39,11 +42,14 @@ services:
     restart: unless-stopped
     environment:
       SERVER_NAME: backend-server-2
-      DB_HOST: 
-      DB_PORT: 
-      DB_NAME: 
-      DB_USERNAME: 
-      DB_PASSWORD: 
+      DB_HOST:
+      DB_PORT:
+      DB_NAME:
+      DB_USERNAME:
+      DB_PASSWORD:
+      JWT_SECRET:
+      ADMIN_EMAIL:
+      ADMIN_PASSWORD:
     entrypoint: ["sh", "-c", "sleep 10 && exec java -jar /app/app.jar"]
     expose:
       - "8080"
