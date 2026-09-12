@@ -33,7 +33,7 @@ public class Account extends SoftDeleteEntity {
 	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 
-	@Column(name = "email", nullable = false, length = 254)
+	@Column(name = "email", nullable = false, unique = true, length = 254)
 	private String email;
 
 	@Column(name = "password", length = 255)

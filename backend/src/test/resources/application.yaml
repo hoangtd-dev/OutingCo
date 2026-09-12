@@ -7,3 +7,9 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create-drop
+
+app:
+  server-name: test
+  jwt:
+    secret: test-secret-key-at-least-32-bytes-long-for-hs256
+    expiration-minutes: 60
