@@ -54,7 +54,6 @@ public class AdminAccountSeeder implements CommandLineRunner {
 	}
 
 	@Override
-	@Transactional
 	public void run(String... args) {
 		if (adminEmail.isBlank() || adminPassword.isBlank()) {
 			log.info("Admin seeding skipped: app.seed.admin-email and app.seed.admin-password are not both set");

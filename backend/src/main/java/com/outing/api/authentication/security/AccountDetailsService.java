@@ -7,7 +7,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.outing.api.authentication.entities.Account;
 import com.outing.api.authentication.repositories.AccountRepository;
@@ -26,7 +25,6 @@ public class AccountDetailsService implements UserDetailsService {
 	}
 
 	@Override
-	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		Account account = accountRepository.findByEmail(email)
 				.orElseThrow(() -> new UsernameNotFoundException("Account not found: " + email));
@@ -45,7 +43,6 @@ public class AccountDetailsService implements UserDetailsService {
 				.build();
 	}
 
-	@Transactional(readOnly = true)
 	public List<String> findRoleNames(int userId) {
 		return userRoleRepository.findByUserId(userId).stream()
 				.map(userRole -> userRole.getRole().getRoleName())
