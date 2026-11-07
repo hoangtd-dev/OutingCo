@@ -6,4 +6,6 @@ import com.outing.api.authentication.entities.User;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 
+	boolean existsByEmail(String email);
+
 }
