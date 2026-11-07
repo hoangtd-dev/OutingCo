@@ -14,7 +14,7 @@ import com.outing.api.venue.entities.Venue;
 public class VenueMapper {
 
 	public VenueResponse toResponse(Venue venue) {
-		return new VenueResponse(venue.getId(), venue.getName(), venue.getIsDeleted());
+		return new VenueResponse(venue.getId(), venue.getName());
 	}
 
 	public List<VenueResponse> toResponseList(List<Venue> venues) {

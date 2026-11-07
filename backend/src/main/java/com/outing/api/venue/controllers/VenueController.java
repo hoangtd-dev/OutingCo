@@ -1,7 +1,7 @@
 package com.outing.api.venue.controllers;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -37,9 +37,8 @@ public class VenueController {
 	}
 
 	@GetMapping
-	public ResponseEntity<List<VenueResponse>> getVenues() {
-		List<Venue> venues = venueRepository.findAll();
-		return ResponseEntity.ok(mapper.toResponseList(venues));
+	public ResponseEntity<Page<VenueResponse>> getVenues(Pageable pageable) {
+		return ResponseEntity.ok(venueRepository.findAll(pageable).map(mapper::toResponse));
 	}
 
 	@PostMapping
