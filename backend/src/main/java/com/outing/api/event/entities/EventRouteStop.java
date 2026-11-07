@@ -4,8 +4,8 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import com.outing.api.client.entities.Client;
+import com.outing.api.event.enums.StopStatus;
 import com.outing.api.shared.entities.SoftDeleteEntity;
-import com.outing.api.transport.enums.StopStatus;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
