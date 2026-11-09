@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -48,6 +49,12 @@ public class ClientController {
 	public ResponseEntity<Void> createClient(@Valid @RequestBody ClientRequest request) {
 		clientRepository.save(clientMapper.toEntity(request));
 		return ResponseEntity.status(HttpStatus.CREATED).build();
+	}
+	@PutMapping("/{id}")
+	public ResponseEntity<ClientResponse> updateClient(@PathVariable int id, @Valid @RequestBody ClientRequest request) {
+		Client client = clientRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found: " + id));
+		clientMapper.updateEntity(client, request);
+		return ResponseEntity.ok(clientMapper.toResponse(clientRepository.save(client)));
 	}
 
 	@DeleteMapping("/{id}")
