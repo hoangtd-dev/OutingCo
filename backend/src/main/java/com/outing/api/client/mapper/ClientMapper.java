@@ -31,6 +31,11 @@ public class ClientMapper {
 
 	public Client toEntity(ClientRequest request) {
 		Client client = new Client();
+		updateEntity(client, request);
+		return client;
+	}
+
+	public void updateEntity(Client client,ClientRequest request) {
 		User caseManager = new User();
 		caseManager.setId(request.caseManagerId());
 		client.setCaseManager(caseManager);
@@ -47,7 +52,6 @@ public class ClientMapper {
 		if (request.isActive() != null) {
 			client.setIsActive(request.isActive());
 		}
-		return client;
 	}
 
 	private Address toAddress(AddressRequest request) {

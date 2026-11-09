@@ -3,6 +3,7 @@ package com.outing.api.client.dto;
 import java.time.LocalDate;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
@@ -10,13 +11,13 @@ import jakarta.validation.constraints.Size;
 
 public record ClientRequest(
 
-		@NotNull int caseManagerId,
+		@NotNull Integer caseManagerId,
 
 		@NotBlank @Size(max = 50) String firstName,
 
 		@NotBlank @Size(max = 100) String lastName,
 
-		@NotBlank @Size(max = 254) String email,
+		@NotBlank @Email  @Size(max = 254) String email,
 
 		@Valid AddressRequest address,
 
